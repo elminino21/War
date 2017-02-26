@@ -4,18 +4,21 @@ package war.linkedList;
 public class LinkedStack<T> implements StackInterface<T>
 {
   protected LLNode<T> top;   // reference to the top of this stack
-
+  private int size;
   public LinkedStack()
   {
+	this.size = 0;
     top = null;
   }
 
   public void push(T element)
   // Places element at the top of this stack.
   { 
+	  
     LLNode<T> newNode = new LLNode<T>(element);
     newNode.setLink(top);
     top = newNode;
+    size++;
   }     
 
   public void pop()
@@ -26,6 +29,7 @@ public class LinkedStack<T> implements StackInterface<T>
       throw new StackUnderflowException("Pop attempted on an empty stack.");
     else
       top = top.getLink();
+    	size--;
   }
 
   public T top()
@@ -48,6 +52,11 @@ public class LinkedStack<T> implements StackInterface<T>
   // Returns false - a linked stack is never full
   {              
       return false;
+  }
+  
+  public int size()
+  {
+	  return size;
   }
 
 }
