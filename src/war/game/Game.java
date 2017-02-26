@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import war.linkedList.mvc.View;
 
 public class Game extends Application
 {
@@ -20,11 +21,10 @@ public class Game extends Application
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-stage.setTitle("WAR!!!");
+		stage.setTitle("WAR!!!");
 		
-		BorderPane root = new BorderPane();
 		
-		Scene scene = new Scene ( root , 900, 800);
+		Scene scene = new Scene ( new View() , 900, 800);
 		 
 		stage.setScene(scene);
 		stage.setResizable(false);

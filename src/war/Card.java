@@ -19,6 +19,7 @@ public class Card {
 	}
 	public void setFace(String a) 
 	{
+		
 	}
 	public void setSuit(String a)
 	{
