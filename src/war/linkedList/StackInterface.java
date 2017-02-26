@@ -4,7 +4,7 @@
 // Interface for a class that implements a stack of <T>.
 // A stack is a last-in, first-out structure.
 //----------------------------------------------------------------------------
-package ch02.stacks;
+package war.linkedList;
 
 public interface StackInterface<T>
 {

@@ -1,9 +1,26 @@
 package war;
 
-public class Desk extends Card{
+import war.linkedList.LinkedStack;
+
+public class Desk extends LinkedStack{
 	
-	int size();
-	void suffle();
-	Card draw();
-	void swapElemente(int, int);
+	
+	
+	public int size()
+	{
+		return 0;
+	}
+	public	void suffle()
+	{
+
+	}
+	public Card draw()
+	{
+		return null;
+	}
+	public	void swapElemente(int elemetA, int elementB)
+	{
+
+	}
+
 }

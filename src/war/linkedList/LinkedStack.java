@@ -1,12 +1,5 @@
-//----------------------------------------------------------------------
-// LinkedStack.java         by Dale/Joyce/Weems                Chapter 2
-//
-// Implements StackInterface using a linked list to hold the elements.
-//-----------------------------------------------------------------------
 
-package ch02.stacks;
-
-import support.LLNode;
+package war.linkedList;
 
 public class LinkedStack<T> implements StackInterface<T>
 {

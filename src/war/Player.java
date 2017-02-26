@@ -1,16 +1,42 @@
 package war;
 
+import war.linkedList.LinkedStack;
+
 public class Player {
 
-	String name;
-	LinkedStack discardStack;
-	LinkedStack drawStack;
+	private String name;
+	private LinkedStack discardStack;
+	private LinkedStack drawStack;
 	
-	Player(String);
-	Card draw();
-	void discard(Card card);
-	void addToDrawStack(Card);
-	boolean hasCards();
-	String toString();
-	void replenishDrawStack();
+	public Player(String s)
+	{
+		
+	}
+	public Card draw()
+	{
+		return null;
+		
+	}
+	public void discard(Card card)
+	{
+		
+	}
+	public void addToDrawStack(Card a)
+	{
+		
+	}
+	public boolean hasCards()
+	{
+		return false;
+		
+	}
+	public String toString()
+	{
+		return name;
+		
+	}
+	public void replenishDrawStack()
+	{
+		
+	}
 }

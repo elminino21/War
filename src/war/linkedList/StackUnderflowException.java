@@ -1,4 +1,4 @@
-package ch02.stacks;
+package war.linkedList;
 
 public class StackUnderflowException extends RuntimeException
 {
