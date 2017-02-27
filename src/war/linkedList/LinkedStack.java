@@ -1,6 +1,8 @@
 
 package war.linkedList;
 
+import war.Card;
+
 public class LinkedStack<T> implements StackInterface<T>
 {
   protected LLNode<T> top;   // reference to the top of this stack
@@ -53,11 +55,54 @@ public class LinkedStack<T> implements StackInterface<T>
   {              
       return false;
   }
-  
+  /**
+   * 
+   * @return the size of the current link list
+   */
   public int size()
   {
 	  return size;
   }
 
+ 
+  
+  public Card getCard( String name)
+  {
+	    
+	return  recEvenNum( top,  name);
+	  
+  }
+ 
+  
+  private Card recEvenNum(LLNode<T> list, String name)
+	{
+			if(list == null)
+			{
+				return null;
+			}else if(list.getInfo().toString().equals(name) )
+			{
+				return (Card) list.getInfo();
+			}
+				
+			else
+			{			
+				return   recEvenNum( list.link, name);
+			}	
+	}
+  
+  
+  public void stackPrinter()
+  {
+	  recPrinter(top);
+  }
+
+  private void recPrinter(LLNode<T> list) {
+	 
+	  if (list != null) {
+		  recPrinter(list.link);
+	      System.out.println(list.info);
+	    }
+  }
+  
 }
 

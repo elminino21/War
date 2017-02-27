@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import war.Desk;
 import war.linkedList.mvc.View;
 
 public class Game extends Application
@@ -22,7 +23,7 @@ public class Game extends Application
 	public void start(Stage stage) throws Exception {
 		
 		stage.setTitle("WAR!!!");
-		
+		new Desk();
 		
 		Scene scene = new Scene ( new View() , 900, 800);
 		 

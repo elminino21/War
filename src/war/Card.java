@@ -3,6 +3,7 @@ package war;
 public class Card {
 	private String face;
 	private String suit;
+	private String name = "";
 	/**
 	 * The fallowing two array will help create 
 	 */
@@ -10,16 +11,19 @@ public class Card {
 			"Four_RA.gif" , "Five_RA.gif", "Six_RA.gif", "Seven_RA.gif", "Eight_RA.gif",
 			"Nine_RA.gif", "Ten_RA.gif", "Jack_RA.gif", "Queen_RA.gif", "King_RA.gif" };
 	private String [] suitArray = {
-			"card", "Club", "Diamond", "Heart", "Spade"
+			"card_", "Club_", "Diamond_", "Heart_", "Spade_"
 	};
 	
 	
 	
-	public  Card( int face, int suit)
+	public  Card(  int suit, int face)
 	{
 		this.face = cardface[face] ;
 		this.suit = suitArray[suit];
+		this.name = suitArray[suit] + cardface[face];
+		
 	}
+	
 	public	String getFace()
 	{
 		return face;
@@ -40,20 +44,25 @@ public class Card {
 	{
 		
 	}
+	public void setCardType(String name)
+	{
+		this.name = name;
+	}
 	/**
 	 * 
 	 * @param a
 	 */
 	private void setSuit(String a)
 	{
-
+		
 	}
 	/**
 	 * 
 	 */
 	public String toString()
 	{
-		return (face + suit);
+		
+		return  name;
 	}
 
 }

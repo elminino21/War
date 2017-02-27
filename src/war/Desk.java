@@ -1,5 +1,7 @@
 package war;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import war.linkedList.LinkedStack;
@@ -7,14 +9,22 @@ import war.linkedList.LinkedStack;
 public class Desk extends LinkedStack{
 	
 	private LinkedStack<Card> desk;
+	private List<Card> cardHolder = new ArrayList<>();
+	
 	
 	public Desk()
 	{
 		super();
 		this.desk = new LinkedStack<>();
-		this.createCards();
+	 	this.createCards();
+	     System.out.println(cardHolder.size());
+	 	System.out.println( desk.size());	
 		this.suffle();
+		desk.stackPrinter();
+		
 	}
+	
+	
 	
 	/**
 	 * fill stack with cards. 
@@ -23,9 +33,11 @@ public class Desk extends LinkedStack{
 		
 		for(int i = 1; i <= 4; i++)
 		{
-			for(int j = 1; j <= 4; j++ )
+			for(int j = 1; j <= 13; j++ )
 			{
-				desk.push(new Card(i, j));
+				Card b = new Card(i, j);
+				desk.push(b);
+				cardHolder.add(b);
 			}	
 		}	
 	}
@@ -43,10 +55,15 @@ public class Desk extends LinkedStack{
 	{
 		Random rand = new Random();
 		int swap = 0;
-		for(int i = 1; i <= 52; i++)
+		for(int i = 1; i <= 51; i++)
 		{
-			swap = rand.nextInt( (i-1) ) + 1;
-			this.swapElemente( swap , i);
+			swap = rand.nextInt( i ) ;
+			swap -= 1;
+			if(swap >= 1 && swap < 53 ){
+			
+			
+			this.swapElemente(  cardHolder.get(swap).toString() , cardHolder.get(i).toString());
+			}
 		}
 	}
 	/**
@@ -63,8 +80,14 @@ public class Desk extends LinkedStack{
 	 * @param elemetA
 	 * @param elementB
 	 */
-	public	void swapElemente(int swap, int pivot)
+	public	void swapElemente(String swap, String pivot)
 	{
+		Card swapCard = desk.getCard(swap);
+		
+		Card pivotCard = desk.getCard(pivot);
+		swapCard.setCardType(pivot);
+		pivotCard.setCardType(swap);
+		
 		
 	}
 
