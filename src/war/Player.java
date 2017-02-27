@@ -30,7 +30,7 @@ public class Player {
 	
 	public void addToDrawStack(Card card)
 	{
-		drawStack.push(card);
+		drawStack.push( card );
 	}
 	
 	public boolean hasCards()
@@ -43,7 +43,7 @@ public class Player {
 		return name;	
 	}
 	
-	private void replenishDrawStack()
+	private void replenishDrawStack() throws StackUnderflowException
 	{
 		if(discardStack.isEmpty())
 		{
