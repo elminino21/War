@@ -43,6 +43,11 @@ public class Player {
 		return name;	
 	}
 	
+	public boolean isEmpty()
+	{
+		return discardStack.isEmpty();
+	}
+	
 	private void replenishDrawStack() throws StackUnderflowException
 	{
 		if(discardStack.isEmpty())
