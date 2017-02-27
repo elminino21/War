@@ -9,8 +9,7 @@ import war.linkedList.LinkedStack;
 public class Desk extends LinkedStack{
 	
 	private LinkedStack<Card> desk;
-	private List<Card> cardHolder = new ArrayList<>();
-	
+	private List<Card> cardHolder = new ArrayList<>(); 
 	
 	public Desk()
 	{
@@ -23,7 +22,6 @@ public class Desk extends LinkedStack{
 		desk.stackPrinter();
 		
 	}
-	
 	
 	
 	/**

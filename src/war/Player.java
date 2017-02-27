@@ -1,42 +1,56 @@
 package war;
 
 import war.linkedList.LinkedStack;
+import war.linkedList.StackUnderflowException;
 
 public class Player {
 
 	private String name;
-	private LinkedStack discardStack;
-	private LinkedStack drawStack;
+	private LinkedStack<Card> discardStack;
+	private LinkedStack<Card> drawStack;
 	
-	public Player(String s)
+	public Player(String name)
 	{
-		
+		this.name = name;
+		this.discardStack = new LinkedStack<>();
+		this.drawStack = new LinkedStack<>();
 	}
+	
 	public Card draw()
 	{
-		return null;
-		
+		Card card = drawStack.top();
+		drawStack.pop();
+		return card;
 	}
+	
 	public void discard(Card card)
 	{
-		
+		discardStack.push(card);
 	}
-	public void addToDrawStack(Card a)
+	
+	public void addToDrawStack(Card card)
 	{
-		
+		drawStack.push(card);
 	}
+	
 	public boolean hasCards()
 	{
-		return false;
-		
+		return drawStack.isEmpty();
 	}
+	
 	public String toString()
 	{
-		return name;
-		
+		return name;	
 	}
-	public void replenishDrawStack()
+	
+	private void replenishDrawStack()
 	{
-		
+		if(discardStack.isEmpty())
+		{
+			throw new StackUnderflowException("Descard stack is empty");
+		}else
+		{
+			this.drawStack = discardStack;
+		}
 	}
 }
