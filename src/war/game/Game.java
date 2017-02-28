@@ -23,8 +23,7 @@ public class Game extends Application
 	public void start(Stage stage) throws Exception {
 		
 		stage.setTitle("WAR!!!");
-		new Desk();
-		
+	
 		Scene scene = new Scene ( new View() , 900, 800);
 		 
 		stage.setScene(scene);

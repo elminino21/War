@@ -7,9 +7,13 @@ import war.Card;
 import war.Desk;
 import war.Player;
 import war.linkedList.LinkedStack;
+import war.linkedList.StackUnderflowException;
 
-public class Controller implements  EventHandler<MouseEvent>
+public class Controller implements  EventHandler
 {
+	/**
+	 * @instance valiables
+	 */
 	private View view;
 	private Model model;
 	private Desk desk;
@@ -18,6 +22,10 @@ public class Controller implements  EventHandler<MouseEvent>
 	private Player player1;
 	private Player player2;
 	
+	/**
+	 * @constructor
+	 * @param view
+	 */
 	public Controller(View view)
 	{
 		this.view  = view;
@@ -27,16 +35,19 @@ public class Controller implements  EventHandler<MouseEvent>
 		 this.player2 = new Player("UP2");
 		 this.UP1DrawnStack = new LinkedStack<>();
 		 this.UP2DrawnStack = new LinkedStack<>();
+		 this.cardGiver();
+		 this.cardsetter();
 	}
 		
-	
 	@Override
-	public void handle(MouseEvent event) 
-	{
+	public void handle(Event event) {
+		// TODO Auto-generated method stub
 		this.play();
-		
 	}
 	
+	/**
+	 * main helper method. handles which drows.
+	 */
 	private void play()
 	{
 		drawToDesk();
@@ -78,8 +89,14 @@ public class Controller implements  EventHandler<MouseEvent>
 	 */
 	private void drawToDesk()
 	{
-		UP1DrawnStack.push( player1.draw() );
-		UP2DrawnStack.push(player2.draw());
+		
+		try {
+			UP1DrawnStack.push( player1.draw() );
+			UP2DrawnStack.push(player2.draw());
+		} catch (StackUnderflowException e) {
+			System.out.println("test");
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -113,5 +130,18 @@ public class Controller implements  EventHandler<MouseEvent>
 			}
 		}
 	}
+	/**
+	 * helper method sets the card name on the HBox
+	 */
+	private void cardsetter()
+	{
+		//view.setCenter( view.setView(player1.drawnTop(), player2.drawnTop(),
+			///	UP1DrawnStack.top().toString(),UP1DrawnStack.top().toString()));
+		
+		view.setCenter(  view.setView("s", "s", "s", "s" ));
+			
+	}
+
+
 	
 }
