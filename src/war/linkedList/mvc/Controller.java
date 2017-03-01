@@ -1,5 +1,6 @@
 package war.linkedList.mvc;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -42,6 +43,9 @@ public class Controller implements  EventHandler
 		 this.UP2DrawnStack = new LinkedStack<>();
 		 this.cardGiver();
 		 this.cardsetter();
+		 this.stackStatus();
+		
+		 
 	}
 		
 	@Override
@@ -64,25 +68,31 @@ public class Controller implements  EventHandler
 	private void play()
 	{
 		drawToDesk();
-		
+
 		deskDrawnComparator();
 		if( player1.hasCardWon() || player2.hasCardWon() )
 		{
-			if(!UP1DrawnStack.isEmpty()){
-				if(UP1DrawnStack.top().getFaceNum() == UP2DrawnStack.top().getFaceNum() )
-				{
-					for(int i = 1; i <= 3; i++)
-					{
-						drawToDesk();
-					}
-				}
+			if(!UP1DrawnStack.isEmpty())
+			{
+				this.warChecker();
 			}
-			
+
 		}else 
 		{
 			this.printWinner();
 		}
-		
+
+	}
+	private void warChecker()
+	{
+		if(UP1DrawnStack.top().getFaceNum() == UP2DrawnStack.top().getFaceNum() )
+		{
+			for(int i = 1; i <= 3; i++)
+			{
+				drawToDesk();
+				view.warFlag();					
+			}
+		}
 	}
 	/**
 	 * 
@@ -126,8 +136,9 @@ public class Controller implements  EventHandler
 
 		if(UP1DrawnStack.top().getFaceNum() > UP2DrawnStack.top().getFaceNum())
 		{
+			view.setStyle("-fx-background-color: #51df58");
 			while( !UP1DrawnStack.isEmpty() && !UP2DrawnStack.isEmpty() ){
-			
+				
 				player1.addToWonStack(UP1DrawnStack.top());
 				UP1DrawnStack.pop();
 				player1.addToWonStack(UP2DrawnStack.top());
@@ -135,6 +146,7 @@ public class Controller implements  EventHandler
 			}
 		}else if (  UP2DrawnStack.top().getFaceNum() >  UP1DrawnStack.top().getFaceNum())
 		{
+			view.setStyle("-fx-background-color: #51df58");
 			while( !UP1DrawnStack.isEmpty() && !UP2DrawnStack.isEmpty() ){
 				player2.addToWonStack(UP1DrawnStack.top());
 				UP1DrawnStack.pop();
@@ -193,7 +205,7 @@ public class Controller implements  EventHandler
 	private void cardsetter()
 	{
 		VBox center = new VBox(50);
-		center.setPadding( new Insets(40, 50, 50, 300) );
+		center.setPadding( new Insets(40, 50, 50, 100) );
 		
 		if(player2.hasCardDrawn())
 		{
@@ -203,7 +215,7 @@ public class Controller implements  EventHandler
 		center.getChildren().add( view.CPU(player2));
 		}
 			
-		center.getChildren().add( view.centerStack(UP1DrawnStack, UP2DrawnStack ) );
+	//	center.getChildren().add( view.centerStack(UP1DrawnStack, UP2DrawnStack ) );
 		
 		center.getChildren().add( view.Up1(player1)  );
 		
@@ -216,15 +228,34 @@ public class Controller implements  EventHandler
 	 */
 	private void stackStatus(){
 		
-		System.out.println("up1 on deck size " + UP1DrawnStack.size());
-		System.out.println( "up2 on deck size " +UP2DrawnStack.size());
 		
-	   System.out.println("up1 on won size " +player1.wonStackSize());
-	    System.out.println("up1 on draw size " +player1.drawStackSize());
+		this.statusPrinter();
+	    view.statusDisplayer(" Up1 on won size " +player1.wonStackSize() + "\n Up1 on draw size " +player1.drawStackSize() +  
+	    		"\n CPU on won size " +player2.wonStackSize() + "\n CPU on draw size " +player2.drawStackSize());
 	    
-	    System.out.println("up2 on won size " +player2.wonStackSize());
-	    System.out.printf("up2 on draw size " +player2.drawStackSize() +"\n\n");
 	
+	}
+	private void statusPrinter()
+	{
+		System.out.println(" Up1 on deck size " + UP1DrawnStack.size());
+		System.out.println( " Up2 on deck size " +UP2DrawnStack.size());
+		
+	   System.out.println(" Up1 on won size " +player1.wonStackSize());
+	    System.out.println(" Up1 on draw size " +player1.drawStackSize());
+	    
+	    System.out.println(" Up2 on won size " +player2.wonStackSize());
+	    System.out.printf(" Up2 on draw size " +player2.drawStackSize() +"\n\n");
+	}
+	
+	private void test()
+	{
+		new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+            	
+            }
+            	
+        }.start();
 	}
 	
 	

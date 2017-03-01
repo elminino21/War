@@ -3,13 +3,19 @@ package war.linkedList.mvc;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import war.Card;
@@ -31,8 +37,9 @@ public class View extends BorderPane{
 	{
 		super();
 		controller = new Controller(this);
+		setUserNames();
 		super.setStyle("-fx-background-color: #51df58");
-		
+		 new AboutGame();
 	}
 
 	/**
@@ -44,8 +51,8 @@ public class View extends BorderPane{
 		Image image = new Image(name);
 		
 	    viewImage = new ImageView();
-		viewImage.setFitHeight(170);
-		viewImage.setFitWidth(170);
+		viewImage.setFitHeight(200);
+		viewImage.setFitWidth(200);
 		viewImage.setImage(image);
 		viewImage.setPreserveRatio(true);
 		viewImage.setSmooth(true);
@@ -63,7 +70,7 @@ public class View extends BorderPane{
 			LinkedStack<Card> drawnStack1, LinkedStack<Card> drawnStack2)
 	{		
 		VBox center = new VBox(50);
-		center.setPadding( new Insets(40, 50, 50, 300) );
+		center.setPadding( new Insets(40, 50, 50, 100) );
 		
 		center.getChildren().addAll(this.CPUDrawnOnly(),
 				this.centerStack(drawnStack1, drawnStack2),this.Up1DrawOnly());	
@@ -122,9 +129,9 @@ public class View extends BorderPane{
 	 * @param cardB
 	 * @return
 	 */
-	public FlowPane centerStack(LinkedStack<Card> cardA,LinkedStack<Card> cardB )
+	public AnchorPane centerStack(LinkedStack<Card> cardA,LinkedStack<Card> cardB )
 	{
-		FlowPane center = new FlowPane();
+		AnchorPane center = new AnchorPane();
 		if( !cardA.isEmpty() &&  cardB.isEmpty())
 		{
 			ImageView cardLeft = titleImage("file:cards/"+ cardA.toString());
@@ -151,9 +158,9 @@ public class View extends BorderPane{
 	 * @param cardB
 	 * @return
 	 */
-	public FlowPane centerStackEmpty( )
+	public AnchorPane centerStackEmpty( )
 	{
-		FlowPane center = new FlowPane();
+		AnchorPane center = new AnchorPane();
 		return center;
 	}
 	
@@ -190,11 +197,50 @@ public class View extends BorderPane{
 	{
 		System.out.println("should not see this");
 		HBox UP1Cars = new HBox(20);
-		
 		ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
 		
-	
 		return UP1Cars;
+	}
+	
+	private void setUserNames()
+	{
+		HBox top = new HBox(50);
+		top.setPadding( new Insets(0, 120, 0, 300) );
+		Label labelTop = new Label("CPU");
+		labelTop.setFont(Font.font("Verdana", FontPosture.ITALIC, 30));
+		labelTop.setTextFill(Color.RED);
+		top.getChildren().add(labelTop);
+		
+		this.setTop(top);
+		
+		HBox bottom = new HBox();
+		bottom.setPadding( new Insets(0, 120, 0, 300) );
+		Label labelBotton = new Label("Player 1");
+		labelBotton.setTextFill(Color.RED);
+		labelBotton.setFont(Font.font("Verdana", FontPosture.ITALIC, 30));
+		bottom.getChildren().add(labelBotton);
+		this.setBottom(bottom);
+		
+	}
+	
+	public void warFlag()
+	{
+		Label label= new Label("WAR!");
+		label.setTextFill(Color.WHITE);
+		label.setFont(Font.font(null, FontWeight.BOLD, 60));
+		this.setStyle("-fx-background-color: #f44242");
+		this.setRight(label);
+		
+	}
+	
+	public void statusDisplayer(String status)
+	{
+		Label label= new Label(status);
+		label.setTextFill(Color.WHITE);
+		label.setFont(Font.font(null, FontWeight.BOLD, 20));
+		
+		this.setLeft(label);
+		
 	}
 	
 	
