@@ -4,6 +4,8 @@ public class Card {
 	private String face;
 	private String suit;
 	private String name = "";
+	private int faceInt = 0;
+	private int suitInt = 0;
 	/**
 	 * The fallowing two array will help create 
 	 */
@@ -18,9 +20,12 @@ public class Card {
 	
 	public  Card(  int suit, int face)
 	{
+		this.faceInt = face;
+		this.suitInt = suit;
 		this.face = cardface[face] ;
 		this.suit = suitArray[suit];
-		this.name = suitArray[suit] + cardface[face];
+		
+		this.name = (suitArray[suitInt] + cardface[faceInt]);
 		
 	}
 	
@@ -34,6 +39,7 @@ public class Card {
 	 */
 	public String getSuit()
 	{
+		
 		return suit;
 	}
 	/**
@@ -46,6 +52,9 @@ public class Card {
 	}
 	public void setCardType(String name)
 	{
+		suitArray[suitInt] = name.substring( 0 , name.indexOf("_") );
+		cardface[faceInt] =  name.substring( name.indexOf("_"), name.length());
+		   
 		this.name = name;
 	}
 	/**
@@ -59,10 +68,20 @@ public class Card {
 	/**
 	 * 
 	 */
-	public String toString()
+	public String getCardName()
 	{
 		
-		return  name;
+		return  (suitArray[suitInt] + cardface[faceInt]);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return (suitArray[suitInt] + cardface[faceInt]);
+	}
+	
+	
 
 }

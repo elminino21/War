@@ -43,8 +43,10 @@ public class Controller implements  EventHandler
 	public void handle(Event event) {
 		// TODO Auto-generated method stub
 		System.out.println("UP1 car clicked");
-		System.out.println(player1.toString());
-		System.out.println(player2.toString());
+		System.out.println( player1.drawnTop() );
+		System.out.println( player2.drawnTop() );
+		System.out.println();
+		
 		this.play();
 	}
 	
@@ -55,7 +57,7 @@ public class Controller implements  EventHandler
 	{
 		drawToDesk();
 		
-		if( player1.isEmpty() || player2.isEmpty() )
+		if( player1.hasCardWon() || player2.hasCardWon() )
 		{
 			
 			if(isEqual(UP1DrawnStack, UP2DrawnStack ) )
@@ -108,7 +110,7 @@ public class Controller implements  EventHandler
 	 */
 	private void printWinner()
 	{
-		if(player1.isEmpty())
+		if( player1.hasCardWon() )
 		{
 	    	System.out.println("winner " + player1.drawnTop());
 		}else
@@ -122,16 +124,23 @@ public class Controller implements  EventHandler
 	 */
 	private void cardGiver()
 	{
-		for(int i = 0; i <= 52; i++)
+		for(int i = 0; i <= 51; i++)
 		{
 			if(i % 2 == 0)
 			{	
+				//System.out.println(desk.draw().toString()); //for testing
 				player1.addToDrawStack(desk.draw());
+			
 			}else
 			{
+				//System.out.println(desk.draw().toString()); // for testing
 				player2.addToDrawStack(desk.draw());
 			}
+			
 		}
+		System.out.println( "on player one hand :"	+ player1.drawStackSize()  );
+		System.out.println( "on CPU hand :"	+ 	player2.drawStackSize()  );
+		System.out.println( 	desk.size() );
 	}
 	/**
 	 * helper method sets the card name on the HBox

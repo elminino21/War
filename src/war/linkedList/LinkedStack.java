@@ -100,7 +100,7 @@ public class LinkedStack<T> implements StackInterface<T>
 	 
 	  if (list != null) {
 		  recPrinter(list.link);
-	      System.out.println(list.info);
+	      System.out.println(list.info.toString());
 	    }
   }
   

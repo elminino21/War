@@ -19,7 +19,7 @@ public class Desk extends LinkedStack{
 	     System.out.println(cardHolder.size());
 	 	System.out.println( desk.size());	
 		this.suffle();
-		//desk.stackPrinter();
+		desk.stackPrinter();
 		
 	}
 	
@@ -57,8 +57,7 @@ public class Desk extends LinkedStack{
 		{
 			swap = rand.nextInt( i ) ;
 			swap -= 1;
-			if(swap >= 1 && swap < 53 ){
-			
+			if(swap >= 0 && swap < 53 ){
 			
 			this.swapElemente(  cardHolder.get(swap).toString() , cardHolder.get(i).toString());
 			}
@@ -70,9 +69,8 @@ public class Desk extends LinkedStack{
 	 */
 	public Card draw()
 	{
-		
 		Card card = desk.top();
-				desk.pop();
+		desk.pop();
 		
 		return card;
 	}
@@ -84,6 +82,8 @@ public class Desk extends LinkedStack{
 	 */
 	public	void swapElemente(String swap, String pivot)
 	{
+		//System.out.println(swap);
+		//System.out.println(pivot);
 		Card swapCard = desk.getCard(swap);
 		
 		Card pivotCard = desk.getCard(pivot);

@@ -9,7 +9,7 @@ public class Player {
 	 * @instance valirables
 	 */
 	private String name;
-	private LinkedStack<Card> discardStack;
+	private LinkedStack<Card> wonStack;
 	private LinkedStack<Card> drawStack;
 	
 	/**
@@ -19,8 +19,8 @@ public class Player {
 	public Player(String name)
 	{
 		this.name = name;
-		this.discardStack = new LinkedStack<>();
-		this.drawStack = new LinkedStack<>();
+		this.wonStack = new LinkedStack<Card>();
+		this.drawStack = new LinkedStack<Card>();
 	}
 	
 	/**
@@ -32,6 +32,7 @@ public class Player {
 	{
 		if(drawStack.isEmpty())
 			{
+				System.out.println("stack replanished");
 				replenishDrawStack();
 			}
 		Card card = drawStack.top();
@@ -43,9 +44,9 @@ public class Player {
 	 * adds card to descard stack
 	 * @param card
 	 */
-	public void discard(Card card)
+	public void addToWonStack(Card card)
 	{
-		discardStack.push(card);
+		wonStack.push(card);
 	}
 	/**
 	 * adds to drow stack
@@ -59,9 +60,8 @@ public class Player {
 	 * test is draws stack is full
 	 * @return
 	 */
-	public boolean hasCards()
+	public boolean hasCardDrawn()
 	{
-		System.out.println(drawStack.top().toString() );
 		return drawStack.isEmpty();
 	}
 	/**
@@ -69,22 +69,24 @@ public class Player {
 	 */
 	public String drawnTop()
 	{
-		return discardStack.top().toString();
+		Card card = drawStack.top();
+		return (card.getCardName());
 	}
 	/**
-	 * return the name user's name.
+	 * retusn a string representatin of top.
 	 */
-	public String toString()
+	public String wonTop()
 	{
-		return drawStack.top().toString();	
+		return wonStack.top().getCardName();
 	}
+	
 	/**
 	 * this is stack is empty
 	 * @return
 	 */
-	public boolean isEmpty()
+	public boolean hasCardWon()
 	{
-		return discardStack.isEmpty();
+		return wonStack.isEmpty();
 	}
 	
 	/**
@@ -95,14 +97,20 @@ public class Player {
 	{
 		LinkedStack<Card> temp = new LinkedStack<Card>();
 		
-		if( discardStack.isEmpty() && drawStack.isEmpty() )
+		if( wonStack.isEmpty() && drawStack.isEmpty() )
 		{
 			throw new StackUnderflowException("Descard stack is empty");
 		}else
 		{
 			 temp = drawStack;
-			this.drawStack = discardStack;
-			discardStack = temp;
+			this.drawStack = wonStack;
+			wonStack = temp;
 		}
 	}
+	
+	public int drawStackSize()
+	{
+		return drawStack.size();
+	}
+	
 }
