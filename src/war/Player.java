@@ -112,5 +112,11 @@ public class Player {
 	{
 		return drawStack.size();
 	}
+	public int wonStackSize()
+	{
+		return wonStack.size();
+	}
+	
+	
 	
 }

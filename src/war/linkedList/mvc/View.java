@@ -2,6 +2,7 @@ package war.linkedList.mvc;
 
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -10,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import war.Card;
 import war.Player;
 import war.linkedList.LinkedStack;
@@ -62,11 +64,15 @@ public class View extends BorderPane{
 	{		
 		VBox center = new VBox(50);
 		center.setPadding( new Insets(40, 50, 50, 300) );
-		//ImageView viewImageCenter = titleImage("file:cards/Spade_Queen_RA.gif");
 		
 		center.getChildren().addAll(this.CPUDrawnOnly(),
 				this.centerStack(drawnStack1, drawnStack2),this.Up1DrawOnly());	
 		 this.setCenter(center);
+	}
+	public void setView( VBox center)
+	{
+		center.requestLayout();
+		this.setCenter(center);
 	}
 	
 	/**
@@ -78,10 +84,20 @@ public class View extends BorderPane{
 	{
 		HBox CPUCars = new HBox(20);
 	    ImageView viewImageCPUHid = titleImage("file:cards/Card_back.png");
-		ImageView viewImageCPUShow = titleImage("file:cards/" + card.drawnTop());
-		CPUCars.getChildren().addAll( viewImageCPUHid, viewImageCPUShow);
-			
+	    
+	    
+	    if( !card.hasCardWon())
+	    {
+	    	ImageView viewImageCPUShow = titleImage("file:cards/" + card.wonTop());
+	    	CPUCars.getChildren().addAll( viewImageCPUHid, viewImageCPUShow);
+	    	
+	    }else if(!card.hasCardWon() &&  !card.hasCardDrawn())
+	    {
+	    	CPUCars = CPUDrawnOnly();
+	    }
+	    else{
 				CPUCars.getChildren().addAll( viewImageCPUHid);
+	    }
 			
 		return CPUCars;
 	}
@@ -109,9 +125,24 @@ public class View extends BorderPane{
 	public FlowPane centerStack(LinkedStack<Card> cardA,LinkedStack<Card> cardB )
 	{
 		FlowPane center = new FlowPane();
+		if( !cardA.isEmpty() &&  cardB.isEmpty())
+		{
+			ImageView cardLeft = titleImage("file:cards/"+ cardA.toString());
+
+			center.getChildren().add(cardLeft);
+		}else if (cardA.isEmpty() &&  !cardB.isEmpty() )
+		{
+			ImageView cardRight = titleImage("file:cards/"+ cardB.toString());
+			center.getChildren().add(cardRight);
+		}else if (!cardA.isEmpty() &&  !cardB.isEmpty() )
+		{
 			ImageView cardLeft = titleImage("file:cards/"+ cardA.toString());
 			ImageView cardRight = titleImage("file:cards/"+ cardB.toString());
-			center.getChildren().addAll(cardLeft, cardRight);		
+			center.getChildren().addAll(cardLeft, cardRight);			
+		}else
+		{
+			center.getChildren().addAll(centerStackEmpty());
+		}
 		return center;
 	}
 	/**
@@ -133,12 +164,21 @@ public class View extends BorderPane{
 	public HBox Up1( Player card )
 	{
 		HBox UP1Cars = new HBox(20);
-			ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
-			ImageView viewImageUP1Show = titleImage("file:cards/"+ card.drawnTop());	
-			viewImageUP1Hid.setCursor(Cursor.HAND );
-			viewImageUP1Hid.setOnMouseClicked( (e)-> controller.handle(e));
-			UP1Cars.getChildren().addAll(viewImageUP1Hid, viewImageUP1Show);
-		
+
+		ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");
+		if( !card.hasCardWon())
+		{
+			ImageView viewImageUP1Show = titleImage("file:cards/" + card.wonTop());
+			UP1Cars.getChildren().addAll( viewImageUP1Hid, viewImageUP1Show);
+		}else if( !card.hasCardWon() &&  !card.hasCardDrawn() )
+		{
+			UP1Cars = Up1DrawOnly();
+		} else{
+			UP1Cars.getChildren().addAll( viewImageUP1Hid);
+		}
+
+		viewImageUP1Hid.setCursor(Cursor.HAND );
+		viewImageUP1Hid.setOnMouseClicked( (e)-> controller.handle(e));	
 		return UP1Cars;
 	}
 	
@@ -148,11 +188,11 @@ public class View extends BorderPane{
 	 */
 	public HBox Up1DrawOnly()
 	{
+		System.out.println("should not see this");
 		HBox UP1Cars = new HBox(20);
+		
 		ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
-		viewImageUP1Hid.setCursor(Cursor.HAND );
-		viewImageUP1Hid.setOnMouseClicked( (e)-> controller.handle(e));
-		UP1Cars.getChildren().addAll(viewImageUP1Hid);
+		
 	
 		return UP1Cars;
 	}

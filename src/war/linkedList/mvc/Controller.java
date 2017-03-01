@@ -2,7 +2,12 @@ package war.linkedList.mvc;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import war.Card;
 import war.Desk;
 import war.Player;
@@ -42,12 +47,15 @@ public class Controller implements  EventHandler
 	@Override
 	public void handle(Event event) {
 		// TODO Auto-generated method stub
-		System.out.println("UP1 car clicked");
-		System.out.println( player1.drawnTop() );
-		System.out.println( player2.drawnTop() );
-		System.out.println();
+		//System.out.println("UP1 car clicked");
+		//System.out.println( player1.drawnTop() );
+		//System.out.println( player2.drawnTop() );
+	//	System.out.println();
 		
+		stackStatus();
 		this.play();
+		this.cardsetter();
+		event.consume();
 	}
 	
 	/**
@@ -57,14 +65,16 @@ public class Controller implements  EventHandler
 	{
 		drawToDesk();
 		
+		deskDrawnComparator();
 		if( player1.hasCardWon() || player2.hasCardWon() )
 		{
-			
-			if(isEqual(UP1DrawnStack, UP2DrawnStack ) )
-			{
-				for(int i = 1; i <= 4; i++)
+			if(!UP1DrawnStack.isEmpty()){
+				if(UP1DrawnStack.top().getFaceNum() == UP2DrawnStack.top().getFaceNum() )
 				{
-					drawToDesk();
+					for(int i = 1; i <= 3; i++)
+					{
+						drawToDesk();
+					}
 				}
 			}
 			
@@ -98,24 +108,54 @@ public class Controller implements  EventHandler
 		try {
 			UP1DrawnStack.push( player1.draw() );
 			UP2DrawnStack.push(player2.draw());
+			
+			
 		} catch (StackUnderflowException e) {
+			System.out.println( );
+			System.out.println( );
+			System.out.println("error on "+player1.drawnTop() );
+			System.out.println( "error on "+player2.drawnTop());
+			
 			System.out.println("error detected on draw to desk");
 			e.printStackTrace();
 		}
 	}
 	
+	private void deskDrawnComparator()
+	{
+
+		if(UP1DrawnStack.top().getFaceNum() > UP2DrawnStack.top().getFaceNum())
+		{
+			while( !UP1DrawnStack.isEmpty() && !UP2DrawnStack.isEmpty() ){
+			
+				player1.addToWonStack(UP1DrawnStack.top());
+				UP1DrawnStack.pop();
+				player1.addToWonStack(UP2DrawnStack.top());
+				UP2DrawnStack.pop();
+			}
+		}else if (  UP2DrawnStack.top().getFaceNum() >  UP1DrawnStack.top().getFaceNum())
+		{
+			while( !UP1DrawnStack.isEmpty() && !UP2DrawnStack.isEmpty() ){
+				player2.addToWonStack(UP1DrawnStack.top());
+				UP1DrawnStack.pop();
+				player2.addToWonStack(UP2DrawnStack.top());
+				UP2DrawnStack.pop();
+			}
+		}
+
+	}
 	
 	/**
 	 * prints the winner of the game
 	 */
 	private void printWinner()
 	{
-		if( player1.hasCardWon() )
+		if( player1.hasCardWon() &&  player1.hasCardDrawn() )
 		{
-	    	System.out.println("winner " + player1.drawnTop());
-		}else
+	    	System.out.println("winner  player 2" );
+		}else if (player2.hasCardWon() &&  player2.hasCardDrawn())
 		{
-			System.out.println("winner " + player2.drawnTop());
+			System.out.println("winner  player 1" );
 		}
 	}
 	
@@ -145,15 +185,48 @@ public class Controller implements  EventHandler
 	/**
 	 * helper method sets the card name on the HBox
 	 */
-	private void cardsetter()
+	private void cardSetter()
 	{
 			view.setView( player1, player2, UP1DrawnStack, UP2DrawnStack );	
 	}
 	
-	private void cardSetter()
+	private void cardsetter()
 	{
+		VBox center = new VBox(50);
+		center.setPadding( new Insets(40, 50, 50, 300) );
 		
+		if(player2.hasCardDrawn())
+		{
+			center.getChildren().add(view.CPU(player2));
+		}else{
+		
+		center.getChildren().add( view.CPU(player2));
+		}
+			
+		center.getChildren().add( view.centerStack(UP1DrawnStack, UP2DrawnStack ) );
+		
+		center.getChildren().add( view.Up1(player1)  );
+		
+		view.setView(center);
 	}
 
+	
+	/**
+	 * prints updated quantities of all the stacks
+	 */
+	private void stackStatus(){
+		
+		System.out.println("up1 on deck size " + UP1DrawnStack.size());
+		System.out.println( "up2 on deck size " +UP2DrawnStack.size());
+		
+	   System.out.println("up1 on won size " +player1.wonStackSize());
+	    System.out.println("up1 on draw size " +player1.drawStackSize());
+	    
+	    System.out.println("up2 on won size " +player2.wonStackSize());
+	    System.out.printf("up2 on draw size " +player2.drawStackSize() +"\n\n");
+	
+	}
+	
+	
 	
 }

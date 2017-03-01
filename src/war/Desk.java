@@ -19,10 +19,9 @@ public class Desk extends LinkedStack{
 	     System.out.println(cardHolder.size());
 	 	System.out.println( desk.size());	
 		this.suffle();
-		desk.stackPrinter();
+		//desk.stackPrinter();
 		
 	}
-	
 	
 	/**
 	 * fill stack with cards. 
