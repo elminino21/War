@@ -10,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import war.Card;
+import war.Player;
+import war.linkedList.LinkedStack;
 
 public class View extends BorderPane{
 	
@@ -27,6 +30,7 @@ public class View extends BorderPane{
 		super();
 		controller = new Controller(this);
 		super.setStyle("-fx-background-color: #51df58");
+		
 	}
 
 	/**
@@ -53,29 +57,32 @@ public class View extends BorderPane{
 	 * 
 	 * @return
 	 */
-	public VBox setView( String player1Discard, String player2Discard,  String drawnStack1, String drawnStack2)
-	{
-		
+	public void setView( Player player1, Player player2,  
+			LinkedStack<Card> drawnStack1, LinkedStack<Card> drawnStack2)
+	{		
 		VBox center = new VBox(50);
 		center.setPadding( new Insets(40, 50, 50, 300) );
-		ImageView viewImageCenter = titleImage("file:cards/Spade_Queen_RA.gif");
-		center.getChildren().addAll(this.CPU(player2Discard),
-				this.centerStack(drawnStack1, drawnStack2),this.Up1(player1Discard));	
-		return center;
+		//ImageView viewImageCenter = titleImage("file:cards/Spade_Queen_RA.gif");
+		
+		center.getChildren().addAll(this.CPUDrawnOnly(),
+				this.centerStack(drawnStack1, drawnStack2),this.Up1DrawOnly());	
+		 this.setCenter(center);
 	}
 	
 	/**
 	 * method not yet used
 	 * @param cardName
-	 * @return
+	 * @retur
 	 */
-	private HBox  CPU( String cardName)
+	public HBox  CPU( Player card)
 	{
 		HBox CPUCars = new HBox(20);
-		ImageView viewImageCPUHid = titleImage("file:cards/Card_back.png");
-		ImageView viewImageCPUShow = titleImage("file:cards/Club_Ace_RA.gif");
+	    ImageView viewImageCPUHid = titleImage("file:cards/Card_back.png");
+		ImageView viewImageCPUShow = titleImage("file:cards/" + card.drawnTop());
 		CPUCars.getChildren().addAll( viewImageCPUHid, viewImageCPUShow);
-		
+			
+				CPUCars.getChildren().addAll( viewImageCPUHid);
+			
 		return CPUCars;
 	}
 	
@@ -84,7 +91,7 @@ public class View extends BorderPane{
 	 * @param cardName
 	 * @return
 	 */
-	private HBox  CPUDrawnOnly()
+	public HBox  CPUDrawnOnly()
 	{
 		HBox CPUCars = new HBox(20);
 		ImageView viewImageCPUHid = titleImage("file:cards/Card_back.png");
@@ -99,13 +106,12 @@ public class View extends BorderPane{
 	 * @param cardB
 	 * @return
 	 */
-	private FlowPane centerStack(String cardA,String cardB )
+	public FlowPane centerStack(LinkedStack<Card> cardA,LinkedStack<Card> cardB )
 	{
 		FlowPane center = new FlowPane();
-		ImageView cardLeft = titleImage("file:cards/Card_back.png");
-		ImageView cardRight = titleImage("file:cards/Card_back.png");
-		center.getChildren().addAll(cardLeft, cardRight);
-		
+			ImageView cardLeft = titleImage("file:cards/"+ cardA.toString());
+			ImageView cardRight = titleImage("file:cards/"+ cardB.toString());
+			center.getChildren().addAll(cardLeft, cardRight);		
 		return center;
 	}
 	/**
@@ -114,7 +120,7 @@ public class View extends BorderPane{
 	 * @param cardB
 	 * @return
 	 */
-	private FlowPane centerStackEmpty( )
+	public FlowPane centerStackEmpty( )
 	{
 		FlowPane center = new FlowPane();
 		return center;
@@ -124,14 +130,14 @@ public class View extends BorderPane{
 	 * method not used used
 	 * @return
 	 */
-	private HBox Up1( String cardName )
+	public HBox Up1( Player card )
 	{
 		HBox UP1Cars = new HBox(20);
-		ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
-		ImageView viewImageUP1Show = titleImage("file:cards/Heart_Two_RA.gif");	
-		viewImageUP1Hid.setCursor(Cursor.HAND );
-		viewImageUP1Hid.setOnMouseClicked( controller);
-		UP1Cars.getChildren().addAll(viewImageUP1Hid, viewImageUP1Show);
+			ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
+			ImageView viewImageUP1Show = titleImage("file:cards/"+ card.drawnTop());	
+			viewImageUP1Hid.setCursor(Cursor.HAND );
+			viewImageUP1Hid.setOnMouseClicked( (e)-> controller.handle(e));
+			UP1Cars.getChildren().addAll(viewImageUP1Hid, viewImageUP1Show);
 		
 		return UP1Cars;
 	}
@@ -140,17 +146,16 @@ public class View extends BorderPane{
 	 * method not used used
 	 * @return
 	 */
-	private HBox Up1DrawOnly()
+	public HBox Up1DrawOnly()
 	{
 		HBox UP1Cars = new HBox(20);
 		ImageView viewImageUP1Hid = titleImage("file:cards/Card_back.png");	
 		viewImageUP1Hid.setCursor(Cursor.HAND );
-		viewImageUP1Hid.setOnMouseClicked( controller);
+		viewImageUP1Hid.setOnMouseClicked( (e)-> controller.handle(e));
 		UP1Cars.getChildren().addAll(viewImageUP1Hid);
 	
 		return UP1Cars;
 	}
-	
 	
 	
 }

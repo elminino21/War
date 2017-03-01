@@ -19,7 +19,7 @@ public class Desk extends LinkedStack{
 	     System.out.println(cardHolder.size());
 	 	System.out.println( desk.size());	
 		this.suffle();
-		desk.stackPrinter();
+		//desk.stackPrinter();
 		
 	}
 	
@@ -70,7 +70,11 @@ public class Desk extends LinkedStack{
 	 */
 	public Card draw()
 	{
-		return desk.top();
+		
+		Card card = desk.top();
+				desk.pop();
+		
+		return card;
 	}
 	
 	/**

@@ -42,6 +42,9 @@ public class Controller implements  EventHandler
 	@Override
 	public void handle(Event event) {
 		// TODO Auto-generated method stub
+		System.out.println("UP1 car clicked");
+		System.out.println(player1.toString());
+		System.out.println(player2.toString());
 		this.play();
 	}
 	
@@ -52,7 +55,7 @@ public class Controller implements  EventHandler
 	{
 		drawToDesk();
 		
-		if(player1.isEmpty() || player2.isEmpty() )
+		if( player1.isEmpty() || player2.isEmpty() )
 		{
 			
 			if(isEqual(UP1DrawnStack, UP2DrawnStack ) )
@@ -94,7 +97,7 @@ public class Controller implements  EventHandler
 			UP1DrawnStack.push( player1.draw() );
 			UP2DrawnStack.push(player2.draw());
 		} catch (StackUnderflowException e) {
-			System.out.println("test");
+			System.out.println("error detected on draw to desk");
 			e.printStackTrace();
 		}
 	}
@@ -107,10 +110,10 @@ public class Controller implements  EventHandler
 	{
 		if(player1.isEmpty())
 		{
-	    	System.out.println("winner " + player1.isEmpty());
+	    	System.out.println("winner " + player1.drawnTop());
 		}else
 		{
-			System.out.println("winner " + player2.isEmpty());
+			System.out.println("winner " + player2.drawnTop());
 		}
 	}
 	
@@ -135,13 +138,13 @@ public class Controller implements  EventHandler
 	 */
 	private void cardsetter()
 	{
-		//view.setCenter( view.setView(player1.drawnTop(), player2.drawnTop(),
-			///	UP1DrawnStack.top().toString(),UP1DrawnStack.top().toString()));
-		
-		view.setCenter(  view.setView("s", "s", "s", "s" ));
-			
+			view.setView( player1, player2, UP1DrawnStack, UP2DrawnStack );	
 	}
-
+	
+	private void cardSetter()
+	{
+		
+	}
 
 	
 }

@@ -61,6 +61,7 @@ public class Player {
 	 */
 	public boolean hasCards()
 	{
+		System.out.println(drawStack.top().toString() );
 		return drawStack.isEmpty();
 	}
 	/**
@@ -75,7 +76,7 @@ public class Player {
 	 */
 	public String toString()
 	{
-		return name;	
+		return drawStack.top().toString();	
 	}
 	/**
 	 * this is stack is empty
