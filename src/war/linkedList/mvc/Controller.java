@@ -180,12 +180,10 @@ public class Controller implements  EventHandler
 		{
 			if(i % 2 == 0)
 			{	
-				//System.out.println(desk.draw().toString()); //for testing
 				player1.addToDrawStack(desk.draw());
 			
 			}else
 			{
-				//System.out.println(desk.draw().toString()); // for testing
 				player2.addToDrawStack(desk.draw());
 			}
 			
@@ -202,6 +200,9 @@ public class Controller implements  EventHandler
 			view.setView( player1, player2, UP1DrawnStack, UP2DrawnStack );	
 	}
 	
+	/**
+	 * helper method sets the card name on the HBox
+	 */
 	private void cardsetter()
 	{
 		VBox center = new VBox(50);
@@ -215,8 +216,6 @@ public class Controller implements  EventHandler
 		center.getChildren().add( view.CPU(player2));
 		}
 			
-	//	center.getChildren().add( view.centerStack(UP1DrawnStack, UP2DrawnStack ) );
-		
 		center.getChildren().add( view.Up1(player1)  );
 		
 		view.setView(center);
@@ -231,10 +230,13 @@ public class Controller implements  EventHandler
 		
 		this.statusPrinter();
 	    view.statusDisplayer(" Up1 on won size " +player1.wonStackSize() + "\n Up1 on draw size " +player1.drawStackSize() +  
-	    		"\n CPU on won size " +player2.wonStackSize() + "\n CPU on draw size " +player2.drawStackSize());
-	    
+	    		"\n CPU on won size " +player2.wonStackSize() + "\n CPU on draw size " +player2.drawStackSize());  
 	
 	}
+	
+	/**
+	 * prints status to the console
+	 */
 	private void statusPrinter()
 	{
 		System.out.println(" Up1 on deck size " + UP1DrawnStack.size());
@@ -247,6 +249,7 @@ public class Controller implements  EventHandler
 	    System.out.printf(" Up2 on draw size " +player2.drawStackSize() +"\n\n");
 	}
 	
+	//TODO: add animation 
 	private void test()
 	{
 		new AnimationTimer() {

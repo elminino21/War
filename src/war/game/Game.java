@@ -1,6 +1,8 @@
 package war.game;
 
-
+/**
+ * @author Jose Gonzalez
+ */
 
 import javafx.application.Application;
 import javafx.scene.Scene;
