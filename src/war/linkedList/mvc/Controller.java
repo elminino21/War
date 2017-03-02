@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import war.Card;
@@ -21,7 +22,6 @@ public class Controller implements  EventHandler
 	 * @instance valiables
 	 */
 	private View view;
-
 	private Desk desk;
 	private LinkedStack<Card> UP1DrawnStack; // stack on the desk
 	private LinkedStack<Card> UP2DrawnStack; // stack on the desk
@@ -136,6 +136,7 @@ public class Controller implements  EventHandler
 		if(UP1DrawnStack.top().getFaceNum() > UP2DrawnStack.top().getFaceNum())
 		{
 			view.setStyle("-fx-background-color: #51df58");
+			view.setRight(new HBox());
 			while( !UP1DrawnStack.isEmpty() && !UP2DrawnStack.isEmpty() ){
 				
 				player1.addToWonStack(UP1DrawnStack.top());
