@@ -107,11 +107,18 @@ public class Player {
 			wonStack = temp;
 		}
 	}
-	
+	/**
+	 * 
+	 * @return drawStack size
+	 */
 	public int drawStackSize()
 	{
 		return drawStack.size();
 	}
+	/**
+	 * 
+	 * @return wonStack size
+	 */
 	public int wonStackSize()
 	{
 		return wonStack.size();

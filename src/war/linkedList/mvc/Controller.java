@@ -21,7 +21,7 @@ public class Controller implements  EventHandler
 	 * @instance valiables
 	 */
 	private View view;
-	private Model model;
+
 	private Desk desk;
 	private LinkedStack<Card> UP1DrawnStack; // stack on the desk
 	private LinkedStack<Card> UP2DrawnStack; // stack on the desk
@@ -50,16 +50,12 @@ public class Controller implements  EventHandler
 		
 	@Override
 	public void handle(Event event) {
-		// TODO Auto-generated method stub
-		//System.out.println("UP1 car clicked");
-		//System.out.println( player1.drawnTop() );
-		//System.out.println( player2.drawnTop() );
-	//	System.out.println();
-		
 		stackStatus();
 		this.play();
 		this.cardsetter();
-		event.consume();
+		
+		System.out.println("Event register");
+		
 	}
 	
 	/**
@@ -83,6 +79,9 @@ public class Controller implements  EventHandler
 		}
 
 	}
+	/**
+	 * checks if both cards are equal
+	 */
 	private void warChecker()
 	{
 		if(UP1DrawnStack.top().getFaceNum() == UP2DrawnStack.top().getFaceNum() )

@@ -202,6 +202,9 @@ public class View extends BorderPane{
 		return UP1Cars;
 	}
 	
+	/**
+	 * Set users names on the view
+	 */
 	private void setUserNames()
 	{
 		HBox top = new HBox(50);
@@ -223,6 +226,9 @@ public class View extends BorderPane{
 		
 	}
 	
+	/**
+	 * visual equeue that a war event has just happened
+	 */
 	public void warFlag()
 	{
 		Label label= new Label("WAR!");
@@ -233,6 +239,10 @@ public class View extends BorderPane{
 		
 	}
 	
+	/**
+	 * displays the card valances. 
+	 * @param status
+	 */
 	public void statusDisplayer(String status)
 	{
 		Label label= new Label(status);

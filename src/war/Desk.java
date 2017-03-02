@@ -39,14 +39,14 @@ public class Desk extends LinkedStack{
 		}	
 	}
 	/**
-	 * 
+	 * @return int size 
 	 */
 	public int size()
 	{
 		return desk.size();
 	}
 	/**
-	 * 
+	 * suffles the all the cards present on the deck.
 	 */
 	public	void suffle()
 	{
@@ -64,7 +64,7 @@ public class Desk extends LinkedStack{
 	}
 	/**
 	 * 
-	 * @return
+	 * @return the top card of the stack
 	 */
 	public Card draw()
 	{

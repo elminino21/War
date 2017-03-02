@@ -18,7 +18,11 @@ public class Card {
 	};
 	
 	
-	
+	/**
+	 * 
+	 * @param suit
+	 * @param face
+	 */
 	public  Card(  int suit, int face)
 	{
 		this.faceInt = face;
@@ -30,6 +34,10 @@ public class Card {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public	String getFace()
 	{
 		return face;
@@ -51,6 +59,7 @@ public class Card {
 	{
 		
 	}
+	
 	
 	public void setCardType(String name)
 	{
@@ -76,7 +85,7 @@ public class Card {
 		
 	}
 	/**
-	 * 
+	 *  returns card name
 	 */
 	public String getCardName()
 	{
@@ -92,6 +101,10 @@ public class Card {
 		return (suitArray[suitInt] + cardface[faceInt]);
 	}
 	
+	/**
+	 * 
+	 * @return int value of the card
+	 */
 	public int getFaceNum()
 	{
 		return faceInt;
