@@ -1,6 +1,8 @@
 package war.game;
 
 /**
+ * simple implementation of the card game war. 
+ * 
  * @author Jose Gonzalez
  */
 

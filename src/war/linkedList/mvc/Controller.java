@@ -54,7 +54,7 @@ public class Controller implements  EventHandler
 		this.play();
 		this.cardsetter();
 		
-		System.out.println("Event register");
+		event.consume();
 		
 	}
 	

@@ -16,7 +16,11 @@ public class AboutGame {
 		Alert about = new Alert(AlertType.INFORMATION);
 		about.setHeaderText("THIS IS WAR!");
 		about.setResizable(false);
-		about.setContentText("SImple war game implementation");
+		about.setContentText("                   Simple war game implementation\n to process click ok on the window and "
+				+ "click on the player's one"
+				+ "card.Note: The games changes the background color to red if both card are the same and takes 3 cards from  "
+				+ "both CPU and player. it changes back to green when war i done.\n"
+				+ "ENJOY!!!");
 
 		about.showAndWait();
 	}
